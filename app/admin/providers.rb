@@ -16,6 +16,9 @@ ActiveAdmin.register Provider do
   #   permitted
   # end
   
+  filter :title
+  filter :product_name
+  filter :created_at
 
   form do |f|
     f.semantic_errors

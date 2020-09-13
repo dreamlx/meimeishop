@@ -14,6 +14,11 @@ ActiveAdmin.register Buyer do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  filter :title
+  filter :product
+  filter :created_at
+  
   form do |f|
     f.inputs '需求内容' do
       f.input :title
