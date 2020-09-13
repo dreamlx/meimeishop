@@ -1,8 +1,10 @@
+zh-CN:  
   activerecord:
     models:
       provider: 供应方
       buyer: 需求方
       comment: 评论
+      user: 用户
 
     attributes:
       buyer:
@@ -25,5 +27,5 @@
         created_at: 创建时间
 
 time:
- formats:
-   long: "%Y-%m-%d %H:%M:%S"
+  formats:
+    long: "%Y-%m-%d %H:%M:%S"
