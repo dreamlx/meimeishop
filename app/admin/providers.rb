@@ -29,7 +29,7 @@ ActiveAdmin.register Provider do
       f.input :logo
       f.input :qrcode
       f.input :product
-      f.input :avatar
+      # f.input :avatar
       f.input :price
       f.input :quantity
     end

@@ -19,7 +19,7 @@ ActiveAdmin.register_page "Dashboard" do
           ul do
             Provider.last(10).map do |post|
               hr
-              li link_to("#{post.id}-  #{post.title}", admin_provider_path(post))
+              li link_to("[#{post.id}:#{post.created_at.strftime('%b %a %H:%M')}]  #{post.title}", admin_provider_path(post))
             end
           end
         end
@@ -30,7 +30,7 @@ ActiveAdmin.register_page "Dashboard" do
           ul do
             Buyer.last(10).map do |post|
               hr
-              li link_to("#{post.id}-   #{post.title}", admin_buyer_path(post))
+              li link_to("[#{post.id}:#{post.created_at.strftime('%b %a %H:%M')}]    #{post.title}", admin_buyer_path(post))
             end
           end
         end
