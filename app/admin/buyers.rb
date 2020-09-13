@@ -42,6 +42,7 @@ ActiveAdmin.register Buyer do
 				image_tag buyer.avatar.url unless buyer.avatar.url.nil?
 			end
     end
+    active_admin_comments
   end
 
   index do

@@ -62,6 +62,7 @@ ActiveAdmin.register Provider do
 				image_tag provider.avatar.url unless provider.avatar.url.nil?
 			end
     end
+    active_admin_comments
   end
 
   index do

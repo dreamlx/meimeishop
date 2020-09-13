@@ -1,0 +1,23 @@
+  activerecord:
+    models:
+      provider: 供应方
+      buyer: 需求方
+      comment: 评论
+
+    attributes:
+      buyer:
+        title: 发布标题
+        product: 商品名称
+        quantity: 需求数量
+        contact: 联系方式
+        description: 备注说明
+        avatar: 商品图片
+
+      provider:
+        title: 发布标题
+        product_name: 商品名称
+        logo: 商品LOGO
+        qrcode: 我的二维码
+        stock: 库存数量
+        price: 商品单价
+        avatar: 商品图片
