@@ -18,10 +18,10 @@ zh-CN:
 
       provider:
         title: 发布标题
-        product_name: 商品名称
+        product: 商品名称
         logo: 商品LOGO
         qrcode: 我的二维码
-        stock: 库存数量
+        quantity: 库存数量
         price: 商品单价
         avatar: 商品图片
         created_at: 创建时间

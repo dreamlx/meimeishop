@@ -5,19 +5,19 @@ ActiveAdmin.register Provider do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :logo, :qrcode, :sn, :product_name, :price, :stock, :avatar
+  permit_params :title, :logo, :qrcode, :sn, :product, :price, :quantity, :avatar
                 # pictures_attributes: [:id,:name, :imageable_id, :imageable_type, :avatar, :_destroy]
   #
   # or
   #
   # permit_params do
-  #   permitted = [:title, :logo, :qrcode, :sn, :product_name, :price, :stock]
+  #   permitted = [:title, :logo, :qrcode, :sn, :product_name, :price, :quantity]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
   
   filter :title
-  filter :product_name
+  filter :product
   filter :created_at
 
   form do |f|
@@ -28,10 +28,10 @@ ActiveAdmin.register Provider do
       f.input :title
       f.input :logo
       f.input :qrcode
-      f.input :product_name
+      f.input :product
       f.input :avatar
       f.input :price
-      f.input :stock
+      f.input :quantity
     end
 
     f.inputs '商品图片', :multipart => true do
@@ -58,9 +58,9 @@ ActiveAdmin.register Provider do
       row I18n.t('activerecord.attributes.provider.qrcode') do
 				image_tag provider.qrcode.url unless provider.qrcode.url.nil?
 			end
-      row :product_name
+      row :product
       row :price
-      row :stock
+      row :quantity
       row '商品图片' do
 				image_tag provider.avatar.url unless provider.avatar.url.nil?
 			end
@@ -78,9 +78,9 @@ ActiveAdmin.register Provider do
       end
     end
     column :title
-    column :product_name
+    column :product
     column :price
-    column :stock
+    column :quantity
     column :created_at
 
     actions
