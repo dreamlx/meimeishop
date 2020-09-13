@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  logo: MyString
+  qrcode: MyString
+  sn: MyString
+  product_name: MyString
+  price: MyString
+  stock: MyString
+
+two:
+  title: MyString
+  logo: MyString
+  qrcode: MyString
+  sn: MyString
+  product_name: MyString
+  price: MyString
+  stock: MyString
