@@ -68,12 +68,17 @@ ActiveAdmin.register Provider do
   index do
     selectable_column
     column '商品图片' do |provider|
-      link_to image_tag("#{provider.avatar.url}", size: '128x128'), image_path("#{provider.avatar.url}"), :target => "_blank"
+      unless provider.avatar.url.nil?
+        link_to image_tag("#{provider.avatar.url}", size: '128x128'), image_path("#{provider.avatar.url}"), :target => "_blank" 
+      else
+        '暂无图片'
+      end
     end
     column :title
     column :product_name
     column :price
     column :stock
+    column :created_at
 
     actions
 

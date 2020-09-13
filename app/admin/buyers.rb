@@ -5,7 +5,7 @@ ActiveAdmin.register Buyer do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :sn, :product, :quantity, :contact, :description, :avatar
+  permit_params :sn, :product, :quantity, :contact, :description, :avatar, :title
   #
   # or
   #
@@ -47,12 +47,17 @@ ActiveAdmin.register Buyer do
 
   index do
     selectable_column
-    column '商品图片' do |provider|
-      link_to image_tag("#{provider.avatar.url}", size: '128x128'), image_path("#{provider.avatar.url}"), :target => "_blank"
+    column '商品图片' do |buyer|
+      unless buyer.avatar.url.nil?
+        link_to image_tag("#{buyer.avatar.url}", size: '128x128'), image_path("#{buyer.avatar.url}"), :target => "_blank"
+      else
+        '暂无图片'
+      end
     end
     column :title
     column :product
     column :quantity
+    column :created_at
     actions
   end
   

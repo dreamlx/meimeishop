@@ -44,6 +44,7 @@ en:
         contact: 联系方式
         description: 备注说明
         avatar: 商品图片
+        created_at: 创建时间
 
       provider:
         title: 发布标题
@@ -53,3 +54,4 @@ en:
         stock: 库存数量
         price: 商品单价
         avatar: 商品图片
+        created_at: 创建时间
