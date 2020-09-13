@@ -48,6 +48,9 @@ gem 'qiniu-rs' #七牛插件
 gem 'carrierwave-qiniu' #七牛和文件上传组合插件
 
 gem 'rails-i18n'
+gem 'arctic_admin'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
