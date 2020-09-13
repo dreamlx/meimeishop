@@ -18,7 +18,8 @@ ActiveAdmin.register_page "Dashboard" do
         panel "最新供应" do
           ul do
             Provider.last(10).map do |post|
-              li link_to("#{post.id}: #{post.title}", admin_provider_path(post))
+              hr
+              li link_to("#{post.id}-  #{post.title}", admin_provider_path(post))
             end
           end
         end
@@ -28,7 +29,8 @@ ActiveAdmin.register_page "Dashboard" do
         panel "最新需求" do
           ul do
             Buyer.last(10).map do |post|
-              li link_to("#{post.id}: #{post.title}", admin_buyer_path(post))
+              hr
+              li link_to("#{post.id}-   #{post.title}", admin_buyer_path(post))
             end
           end
         end
