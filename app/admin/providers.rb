@@ -5,7 +5,7 @@ ActiveAdmin.register Provider do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :logo, :qrcode, :sn, :product, :price, :quantity, :avatar
+  permit_params :title, :logo,  :sn, :product, :price, :quantity, :avatar
                 # pictures_attributes: [:id,:name, :imageable_id, :imageable_type, :avatar, :_destroy]
   #
   # or
@@ -27,9 +27,7 @@ ActiveAdmin.register Provider do
     f.inputs '供应内容' do
       f.input :title
       f.input :logo
-      f.input :qrcode
       f.input :product
-      # f.input :avatar
       f.input :price
       f.input :quantity
     end
@@ -39,13 +37,6 @@ ActiveAdmin.register Provider do
 			f.input :avatar_cache, as: :hidden
     end
 
-    # f.inputs '商品图片', :multipart => true do
-    #   f.has_many :pictures, new_record: false do |b|
-    #     b.input :avatar, as: :file, hint: (image_tag(f.object.avatar.url + qiniu_deal) if !f.object.new_record? and !f.object.avatar.url.nil?)
-    #     b.input :avatar_cache, as: :hidden
-    #   end
-    # end
-
     f.actions
   end
 
@@ -54,9 +45,6 @@ ActiveAdmin.register Provider do
       row :title
       row I18n.t('activerecord.attributes.provider.logo') do
 				image_tag provider.logo.url unless provider.logo.url.nil?
-			end
-      row I18n.t('activerecord.attributes.provider.qrcode') do
-				image_tag provider.qrcode.url unless provider.qrcode.url.nil?
 			end
       row :product
       row :price

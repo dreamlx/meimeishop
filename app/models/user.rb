@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   validates_uniqueness_of :phone
 
+  mount_uploader :qrcode, AvatarUploader
+
   def email_required?
     false
   end
