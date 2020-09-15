@@ -30,7 +30,7 @@ ActiveAdmin.register Buyer do
       f.input :user_id, :input_html => { :value => current_user.id }, as: :hidden
 
       f.inputs '商品图片', :multipart => true do
-        f.input :avatar, as: :file, hint: (image_tag(f.object.avatar.url) if !f.object.new_record? and !f.object.avatar.url.nil?)
+        f.input :avatar, as: :file, hint: (image_tag(f.object.avatar.url, size: '256x256') if !f.object.new_record? and !f.object.avatar.url.nil?)
         f.input :avatar_cache, as: :hidden
       end
 
@@ -45,7 +45,7 @@ ActiveAdmin.register Buyer do
       row :quantity
       row :description
       row '商品图片' do
-				image_tag buyer.avatar.url unless buyer.avatar.url.nil?
+				link_to((image_tag buyer.avatar.url, size: '256x256'), buyer.avatar.url) unless buyer.avatar.url.nil?
       end
 
       row '---' do

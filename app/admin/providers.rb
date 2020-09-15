@@ -25,7 +25,10 @@ ActiveAdmin.register Provider do
     
     f.inputs '供应内容' do
       f.input :title
-      f.input :logo
+      f.inputs 'logo', :multipart => true do
+        f.input :logo, as: :file, hint: (image_tag(f.object.logo.url, size: '256x256') if !f.object.new_record? and !f.object.logo.url.nil?)
+        f.input :logo_cache, as: :hidden
+      end
       f.input :product
       f.input :price
       f.input :quantity
@@ -33,7 +36,7 @@ ActiveAdmin.register Provider do
     end
 
     f.inputs '商品图片', :multipart => true do
-			f.input :avatar, as: :file, hint: (image_tag(f.object.avatar.url) if !f.object.new_record? and !f.object.avatar.url.nil?)
+			f.input :avatar, as: :file, hint: (image_tag(f.object.avatar.url, size: '256x256') if !f.object.new_record? and !f.object.avatar.url.nil?)
 			f.input :avatar_cache, as: :hidden
     end
 
@@ -50,7 +53,7 @@ ActiveAdmin.register Provider do
       row :price
       row :quantity
       row '商品图片' do
-				image_tag provider.avatar.url unless provider.avatar.url.nil?
+				link_to((image_tag provider.avatar.url, size: '256x256'), provider.avatar.url) unless provider.avatar.url.nil?
       end
       row '---' do
         '---'
