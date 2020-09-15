@@ -4,6 +4,11 @@ dockerfile 指定代理
         ARG http_proxy=http://127.0.0.1:2222
         ARG https_proxy=http://127.0.0.1:2222
 
+国内debian源
+
+        ADD sources.list /etc/apt/
+        sources.list在dockerfile同目录下
+
 ## Commit message 格式
 
         为了方便使用，我们避免了过于复杂的规定，格式较为简单且不限制中英文：
