@@ -11,6 +11,7 @@ WORKDIR /app
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 ENV RAILS_ENV development
+RUN gem install bundler
 RUN bundle install
 COPY . /app
 CMD rake db:migrate assets:precompile && puma -C config/puma.rb
