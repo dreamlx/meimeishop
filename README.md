@@ -1,3 +1,8 @@
+## docker 构建方式
+dockerfile 指定代理
+
+        ARG http_proxy=http://127.0.0.1:2222
+        ARG https_proxy=http://127.0.0.1:2222
 
 ## Commit message 格式
 

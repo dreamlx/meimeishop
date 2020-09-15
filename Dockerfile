@@ -1,6 +1,9 @@
 
 FROM ruby:2.5.1
 MAINTAINER dreamlinx <dreamlinx@gmail.com>
+
+# ARG http_proxy=http://127.0.0.1:2222
+# ARG https_proxy=http://127.0.0.1:2222
 # RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
 RUN apt-get update && apt-get install -y build-essential libpq-dev nodejs vim postgis imagemagick
 RUN mkdir /app
