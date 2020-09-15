@@ -13,6 +13,9 @@ module Meimeishop
     config.i18n.available_locales = ['zh-CN', :en]
     config.i18n.default_locale = :'zh-CN'
     config.time_zone = 'Beijing'
+    # config.assets.compile = true
+    # config.serve_static_assets = true
+    # config.public_file_server.enabled = true
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

@@ -21,5 +21,10 @@ test:
   database: db/test.sqlite3
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: meimeishop_production
+  username: postgres
+  pool: 5
+  password: postgres
+  timeout: 5000
