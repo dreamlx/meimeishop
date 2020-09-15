@@ -8,6 +8,9 @@ class User < ApplicationRecord
 
   mount_uploader :qrcode, AvatarUploader
 
+  has_many :buyers
+  has_many :providers
+
   def email_required?
     false
   end

@@ -15,11 +15,19 @@ ActiveAdmin.register_page "Dashboard" do
     #
     columns do
       column do
+        panel "当前用户" do
+          h3 "电话:" + current_user.phone
+        end
+      end
+    end
+    columns do
+      column do
         panel "最新供应" do
           ul do
             Provider.last(10).map do |post|
               hr
-              li link_to("[#{post.id}:#{post.created_at.strftime('%b %a %H:%M')}]  #{post.title}", admin_provider_path(post))
+              li link_to("[#{post.id}:#{post.created_at.strftime('%b %a %H:%M')}]  #{post.title} [发布者:#{post.user.name}]", admin_provider_path(post))
+              
             end
           end
         end
@@ -30,7 +38,7 @@ ActiveAdmin.register_page "Dashboard" do
           ul do
             Buyer.last(10).map do |post|
               hr
-              li link_to("[#{post.id}:#{post.created_at.strftime('%b %a %H:%M')}]    #{post.title}", admin_buyer_path(post))
+              li link_to("[#{post.id}:#{post.created_at.strftime('%b %a %H:%M')}]    #{post.title} [发布者:#{post.user.name}]", admin_buyer_path(post))
             end
           end
         end

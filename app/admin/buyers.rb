@@ -5,7 +5,7 @@ ActiveAdmin.register Buyer do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :sn, :product, :quantity, :contact, :description, :avatar, :title
+  permit_params :sn, :product, :quantity, :contact, :description, :avatar, :title, :user_id
   #
   # or
   #
@@ -20,12 +20,14 @@ ActiveAdmin.register Buyer do
   filter :created_at
   
   form do |f|
+    f.semantic_errors
+
     f.inputs '需求内容' do
       f.input :title
       f.input :product
       f.input :quantity
-      f.input :contact
       f.input :description
+      f.input :user_id, :input_html => { :value => current_user.id }, as: :hidden
 
       f.inputs '商品图片', :multipart => true do
         f.input :avatar, as: :file, hint: (image_tag(f.object.avatar.url) if !f.object.new_record? and !f.object.avatar.url.nil?)
@@ -41,7 +43,6 @@ ActiveAdmin.register Buyer do
       row :title
       row :product
       row :quantity
-      row :contact
       row :description
       row '商品图片' do
 				image_tag buyer.avatar.url unless buyer.avatar.url.nil?
@@ -52,6 +53,7 @@ ActiveAdmin.register Buyer do
 
   index do
     selectable_column
+    id_column
     column '商品图片' do |buyer|
       unless buyer.avatar.url.nil?
         link_to image_tag("#{buyer.avatar.url}", size: '128x128'), image_path("#{buyer.avatar.url}"), :target => "_blank"

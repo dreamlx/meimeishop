@@ -5,7 +5,7 @@ ActiveAdmin.register Provider do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :logo,  :sn, :product, :price, :quantity, :avatar
+  permit_params :title, :logo,  :sn, :product, :price, :quantity, :avatar, :user_id
                 # pictures_attributes: [:id,:name, :imageable_id, :imageable_type, :avatar, :_destroy]
   #
   # or
@@ -23,13 +23,13 @@ ActiveAdmin.register Provider do
   form do |f|
     f.semantic_errors
     
-    
     f.inputs '供应内容' do
       f.input :title
       f.input :logo
       f.input :product
       f.input :price
       f.input :quantity
+      f.input :user_id, :input_html => { :value => current_user.id }, as: :hidden
     end
 
     f.inputs '商品图片', :multipart => true do
@@ -58,6 +58,7 @@ ActiveAdmin.register Provider do
 
   index do
     selectable_column
+    id_column
     column '商品图片' do |provider|
       unless provider.avatar.url.nil?
         link_to image_tag("#{provider.avatar.url}", size: '128x128'), image_path("#{provider.avatar.url}"), :target => "_blank" 

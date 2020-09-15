@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_095202) do
+ActiveRecord::Schema.define(version: 2020_09_15_102633) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -30,12 +30,12 @@ ActiveRecord::Schema.define(version: 2020_09_15_095202) do
     t.string "sn"
     t.string "product"
     t.integer "quantity"
-    t.string "contact"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
     t.string "title"
+    t.integer "user_id"
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(version: 2020_09_15_095202) do
   create_table "providers", force: :cascade do |t|
     t.string "title"
     t.string "logo"
-    t.string "qrcode"
     t.string "sn"
     t.string "product"
     t.decimal "price"
@@ -59,6 +58,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_095202) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_095202) do
     t.string "phone"
     t.string "qrcode"
     t.string "contact"
+    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
