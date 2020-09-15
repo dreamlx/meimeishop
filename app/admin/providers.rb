@@ -57,15 +57,15 @@ ActiveAdmin.register Provider do
       end
 
       row "发布者" do
-        "#{buyer.user.name.nil? ? '匿名用户' : buyer.user.name}"
+        "#{provider.user.name.nil? ? '匿名用户' : provider.user.name}"
       end
       
       row "联系方式" do
-        "#{buyer.user.contact.nil? ? '无内容' : buyer.user.contact}"
+        "#{provider.user.contact.nil? ? '无内容' : provider.user.contact}"
       end
 
       row "qrcode" do
-        image_tag buyer.user.qrcode.url, size: '128x128' unless buyer.user.qrcode.url.nil?
+        image_tag provider.user.qrcode.url, size: '128x128' unless provider.user.qrcode.url.nil?
       end
     end
     active_admin_comments

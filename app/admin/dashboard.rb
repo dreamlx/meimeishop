@@ -15,9 +15,7 @@ ActiveAdmin.register_page "Dashboard" do
     #
     columns do
       column do
-        panel "当前用户" do
-          h3 "电话:" + current_user.phone
-        end
+          h5 link_to (current_user.name.nil? ? '匿名用户' :  current_user.name), admin_user_path(current_user)
       end
     end
     columns do
@@ -26,7 +24,7 @@ ActiveAdmin.register_page "Dashboard" do
           ul do
             Provider.last(10).map do |post|
               hr
-              li link_to("[#{post.id}:#{post.created_at.strftime('%b %a %H:%M')}]  #{post.title} [发布者:#{post.user.name}]", admin_provider_path(post))
+              li link_to("[#{post.id}:#{post.created_at.strftime('%b %a %H:%M')}]  #{post.title} [发布者:#{post.user.name.nil? ? '匿名用户' : post.user.name}]", admin_provider_path(post))
               
             end
           end
@@ -38,7 +36,7 @@ ActiveAdmin.register_page "Dashboard" do
           ul do
             Buyer.last(10).map do |post|
               hr
-              li link_to("[#{post.id}:#{post.created_at.strftime('%b %a %H:%M')}]    #{post.title} [发布者:#{post.user.name}]", admin_buyer_path(post))
+              li link_to("[#{post.id}:#{post.created_at.strftime('%b %a %H:%M')}]    #{post.title} [发布者:#{post.user.name.nil? ? '匿名用户' : post.user.name}]", admin_buyer_path(post))
             end
           end
         end
