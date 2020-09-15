@@ -24,7 +24,14 @@ ActiveAdmin.register_page "Dashboard" do
           ul do
             Provider.last(10).map do |post|
               hr
-              li link_to("[#{post.id}:#{post.created_at.strftime('%b %a %H:%M')}]  #{post.title} [发布者:#{post.user.name.nil? ? '匿名用户' : post.user.name}]", admin_provider_path(post))
+              li do 
+                span do 
+                  link_to(" [#{post.id}] #{post.title} ",  admin_provider_path(post))
+                end 
+                span do
+                  small link_to(" --#{post.created_at.strftime('%b %a %H:%M')}:发布者:#{post.user.name.nil? ? '匿名用户' : post.user.name}", admin_provider_path(post))
+                end
+              end
               
             end
           end
@@ -36,7 +43,14 @@ ActiveAdmin.register_page "Dashboard" do
           ul do
             Buyer.last(10).map do |post|
               hr
-              li link_to("[#{post.id}:#{post.created_at.strftime('%b %a %H:%M')}]    #{post.title} [发布者:#{post.user.name.nil? ? '匿名用户' : post.user.name}]", admin_buyer_path(post))
+              li do 
+                span do 
+                  link_to(" [#{post.id}] #{post.title} ",  admin_buyer_path(post))
+                end 
+                span do
+                  small link_to(" --#{post.created_at.strftime('%b %a %H:%M')}:发布者:#{post.user.name.nil? ? '匿名用户' : post.user.name}", admin_buyer_path(post))
+                end
+              end
             end
           end
         end

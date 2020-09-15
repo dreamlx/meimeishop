@@ -47,7 +47,7 @@ ActiveAdmin.register Provider do
     attributes_table do
       row :title
       row I18n.t('activerecord.attributes.provider.logo') do
-				image_tag provider.logo.url unless provider.logo.url.nil?
+				image_tag provider.logo.url, size: '256x256' unless provider.logo.url.nil?
 			end
       row :product
       row :price
