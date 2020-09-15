@@ -46,8 +46,25 @@ ActiveAdmin.register Buyer do
       row :description
       row '商品图片' do
 				image_tag buyer.avatar.url unless buyer.avatar.url.nil?
-			end
+      end
+
+      row '---' do
+        '---'
+      end
+
+      row "发布者" do
+        "#{buyer.user.name.nil? ? '匿名用户' : buyer.user.name}"
+      end
+      
+      row "联系方式" do
+        "#{buyer.user.contact.nil? ? '无内容' : buyer.user.contact}"
+      end
+
+      row "qrcode" do
+        image_tag buyer.user.qrcode.url, size: '128x128' unless buyer.user.qrcode.url.nil?
+      end
     end
+
     active_admin_comments
   end
 
