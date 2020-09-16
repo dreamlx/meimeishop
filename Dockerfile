@@ -16,4 +16,6 @@ RUN gem update --system
 RUN gem install bundler -v 2.0.1
 RUN bundle install
 COPY . /app
-CMD rake db:migrate assets:precompile && puma -C config/puma.rb
+CMD rake db:migrate assets:precompile 
+CMD rake db:seed
+puma -C config/puma.rb

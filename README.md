@@ -9,6 +9,19 @@ dockerfile 指定代理
         ADD sources.list /etc/apt/
         sources.list在dockerfile同目录下
 
+osx 配置docker
+
+          {
+                "debug": true,
+                "experimental": true,
+                "registry-mirrors": [
+                "https://dockerhub.azk8s.cn",
+                "http://hub-mirror.c.163.com"
+                ],
+                "insecure-registries" : [ "47.92.240.100:5000" ]
+                
+          }
+
 ## Commit message 格式
 
         为了方便使用，我们避免了过于复杂的规定，格式较为简单且不限制中英文：
