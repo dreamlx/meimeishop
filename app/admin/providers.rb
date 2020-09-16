@@ -5,7 +5,7 @@ ActiveAdmin.register Provider do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :logo,  :sn, :product, :price, :quantity, :avatar, :user_id
+  permit_params :title, :logo,  :sn, :product, :price, :quantity, :avatar, :user_id, :category_id, :sub_category_id
                 # pictures_attributes: [:id,:name, :imageable_id, :imageable_type, :avatar, :_destroy]
   #
   # or
@@ -20,6 +20,27 @@ ActiveAdmin.register Provider do
   filter :product
   filter :created_at
 
+  collection_action :get_sub_category, :method => :post do
+    @category_id = params[:category_id]
+    @sub_categories = Category.where("parent_id = ?", @category_id)
+    render :json => @sub_categories.to_json(:only => [:id, :name]) and return
+  end
+
+  controller do
+    def new
+      @provider = Provider.new
+      @categories = Category.order("id asc").where("parent_id is null")
+      @sub_categories = Category.order("id asc").where("parent_id = ?", @categories.first.id)
+    end
+
+    def edit
+      @categories = Category.order("id asc").where("parent_id is null")
+      @sub_categories = Category.order("id asc").where("parent_id = ?", @categories.first.id)
+    end
+  end
+
+
+
   form do |f|
     f.semantic_errors
     
@@ -29,6 +50,9 @@ ActiveAdmin.register Provider do
         f.input :logo, as: :file, hint: (image_tag(f.object.logo.url, size: '256x256') if !f.object.new_record? and !f.object.logo.url.nil?)
         f.input :logo_cache, as: :hidden
       end
+      f.input :category_id, :as => :select, :collection => categories, :include_blank => false, selected: f.object.category_id
+      f.input :sub_category_id, :as => :select, :collection => sub_categories, :include_blank => false, selected: f.object.sub_category_id
+    
       f.input :product
       f.input :price
       f.input :quantity
@@ -86,7 +110,8 @@ ActiveAdmin.register Provider do
     end
     column :title
     column :product
-    column :price
+    column :category
+    column :sub_category_id
     column :quantity
     column :created_at
 

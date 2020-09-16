@@ -3,6 +3,7 @@ class Provider < ApplicationRecord
     
     has_many :pictures, as: :imageable
     belongs_to :user
+    belongs_to :category
 
     validates :title, presence: true
     validates :price, numericality: true
