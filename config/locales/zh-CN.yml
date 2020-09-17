@@ -6,6 +6,9 @@ zh-CN:
       comment: 评论
       user: 用户
       category: 分类
+      main_category: 主分类
+      sub_category: 子分类
+
 
     attributes:
       buyer:
@@ -32,6 +35,13 @@ zh-CN:
       
       category:
         name: 名称
+
+      main_category:
+        name: 分类名称
+      sub_category:
+        main_category: 上级主分类
+        name: 分类名称
+
         
 
 time:
