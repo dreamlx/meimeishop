@@ -18,4 +18,5 @@ RUN bundle install
 COPY . /app
 CMD rake db:migrate assets:precompile 
 CMD rake db:seed
-puma -C config/puma.rb
+EXPOSE 3000
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

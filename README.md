@@ -1,4 +1,8 @@
 ## docker 构建方式
+
+docker-compose run app rake db:migrate
+docker-compose run app rake db:seed
+
 dockerfile 指定代理
 
         ARG http_proxy=http://127.0.0.1:2222
