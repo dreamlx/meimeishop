@@ -5,6 +5,7 @@ zh-CN:
       buyer: 需求方
       comment: 评论
       user: 用户
+      category: 分类
 
     attributes:
       buyer:
@@ -28,6 +29,9 @@ zh-CN:
       user:
         qrcode: 我的二维码
         phone: 手机号码
+      
+      category:
+        name: 名称
         
 
 time:

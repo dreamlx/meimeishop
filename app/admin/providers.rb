@@ -5,7 +5,8 @@ ActiveAdmin.register Provider do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :logo,  :sn, :product, :price, :quantity, :avatar, :user_id, :category_id, :sub_category_id
+  permit_params :title, :logo,  :sn, :product, :price, :quantity, :avatar, :user_id, 
+                :main_category_id, :sub_category_id, :main_category, :sub_category
                 # pictures_attributes: [:id,:name, :imageable_id, :imageable_type, :avatar, :_destroy]
   #
   # or
@@ -20,22 +21,22 @@ ActiveAdmin.register Provider do
   filter :product
   filter :created_at
 
-  collection_action :get_sub_category, :method => :post do
-    @category_id = params[:category_id]
-    @sub_categories = Category.where("parent_id = ?", @category_id)
+  collection_action :get_sub_category, :method => :get do
+    @main_category_id = params[:main_category_id]
+    @sub_categories = Category.where("parent_id = ?", @main_category_id)
     render :json => @sub_categories.to_json(:only => [:id, :name]) and return
   end
 
   controller do
     def new
       @provider = Provider.new
-      @categories = Category.order("id asc").where("parent_id is null")
-      @sub_categories = Category.order("id asc").where("parent_id = ?", @categories.first.id)
+      @main_categories = Category.order("id asc").where("parent_id is null")
+      @sub_categories = Category.order("id asc").where("parent_id = ?", @main_categories.first.id)
     end
 
     def edit
-      @categories = Category.order("id asc").where("parent_id is null")
-      @sub_categories = Category.order("id asc").where("parent_id = ?", @categories.first.id)
+      @main_categories = Category.order("id asc").where("parent_id is null")
+      @sub_categories = Category.order("id asc").where("parent_id = ?", @main_categories.first.id)
     end
   end
 
@@ -50,8 +51,8 @@ ActiveAdmin.register Provider do
         f.input :logo, as: :file, hint: (image_tag(f.object.logo.url, size: '256x256') if !f.object.new_record? and !f.object.logo.url.nil?)
         f.input :logo_cache, as: :hidden
       end
-      f.input :category_id, :as => :select, :collection => categories, :include_blank => false, selected: f.object.category_id
-      f.input :sub_category_id, :as => :select, :collection => sub_categories, :include_blank => false, selected: f.object.sub_category_id
+      f.input :main_category_id, :as => :select, :collection => main_categories, :include_blank => true, selected: f.object.main_category_id
+      f.input :sub_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_sub_category', 'data-option-observed' => 'provider_sub_category_id'}, :collection => (f.object.main_category_id ? f.object.main_category.sub_categories.collect {|item| [item.name, item.id]} : []) 
     
       f.input :product
       f.input :price
@@ -110,8 +111,8 @@ ActiveAdmin.register Provider do
     end
     column :title
     column :product
-    column :category
-    column :sub_category_id
+    # column :main_category
+    # column :sub_category
     column :quantity
     column :created_at
 

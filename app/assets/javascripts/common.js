@@ -1,11 +1,11 @@
 $(function() {
-    $('#provider_category_id').change(function() {
+    $('#provider_main_category_id').change(function() {
         
       $.ajax({
         url: '/admin/providers/get_sub_category',
-        type: 'POST',
+        type: 'GET',
         data: {
-            category_id: $(this).val()
+            main_category_id: $(this).val()
         },
         dataType:'json',
         headers: {
