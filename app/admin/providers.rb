@@ -70,6 +70,11 @@ ActiveAdmin.register Provider do
 
   show do
     attributes_table do
+
+      row '分类' do 
+        link_to("#{provider.main_category.name} || #{provider.sub_category.name}",'#')
+      end 
+
       row :title
       row I18n.t('activerecord.attributes.provider.logo') do
 				image_tag provider.logo.url, size: '256x256' unless provider.logo.url.nil?
@@ -113,7 +118,7 @@ ActiveAdmin.register Provider do
     column :product
     # column :main_category
     # column :sub_category
-    column :quantity
+    # column :quantity
     column :created_at
 
     actions

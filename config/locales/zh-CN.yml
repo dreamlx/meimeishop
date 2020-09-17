@@ -28,6 +28,8 @@ zh-CN:
         price: 商品单价
         avatar: 商品图片
         created_at: 创建时间
+        main_category: 主分类
+        sub_category: 子分类
 
       user:
         qrcode: 我的二维码
