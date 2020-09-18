@@ -1,0 +1,6 @@
+development:
+  wxappid: "wx7c60c450b305b58a"
+  wx_select: "4209f169689764fab6503db0a2c69bbf"
+production:
+  wxappid: "wx7c60c450b305b58a"
+  wx_select: "4209f169689764fab6503db0a2c69bbf"

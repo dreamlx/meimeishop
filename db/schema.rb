@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_15_102633) do
+ActiveRecord::Schema.define(version: 2020_09_18_014508) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_09_15_102633) do
   create_table "buyers", force: :cascade do |t|
     t.string "sn"
     t.string "product"
-    t.integer "quantity"
+    t.string "quantity"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 2020_09_15_102633) do
     t.string "logo"
     t.string "sn"
     t.string "product"
-    t.decimal "price"
-    t.integer "quantity"
+    t.string "price"
+    t.string "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(version: 2020_09_15_102633) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["phone"], name: "index_users_on_phone", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "wx_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "openid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "authentication_token", limit: 30
+    t.index ["authentication_token"], name: "index_wx_users_on_authentication_token", unique: true
   end
 
 end
