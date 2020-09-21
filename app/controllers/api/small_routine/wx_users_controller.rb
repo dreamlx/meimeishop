@@ -20,7 +20,7 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
       @wx_user = WxUser.create!(openid: json["openid"])
     end
     @wx_user.reset_authentication_token!
-    render json: { status: 200, message: '登录成功' ,user_token: @wx_user.authentication_token}
+    render json: {status: 200, message: '登录成功' ,user_token: @wx_user.authentication_token}
   end
 
   def logout
@@ -50,6 +50,10 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
     else
       render json:{status: 400, message: '绑定失败' }
     end
+  end
+
+  def info
+    @record = @current_wx_user
   end
 
 end

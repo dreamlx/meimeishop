@@ -5,7 +5,8 @@ ActiveAdmin.register Provider do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :logo,  :sn, :product, :price, :quantity, :avatar, :user_id
+  permit_params :title, :logo,  :sn, :product, :price, :quantity, :avatar, :user_id, 
+                :main_category_id, :sub_category_id, :main_category, :sub_category
                 # pictures_attributes: [:id,:name, :imageable_id, :imageable_type, :avatar, :_destroy]
   #
   # or
@@ -20,6 +21,27 @@ ActiveAdmin.register Provider do
   filter :product
   filter :created_at
 
+  collection_action :get_sub_category, :method => :get do
+    @main_category_id = params[:main_category_id]
+    @sub_categories = Category.where("parent_id = ?", @main_category_id)
+    render :json => @sub_categories.to_json(:only => [:id, :name]) and return
+  end
+
+  controller do
+    def new
+      @provider = Provider.new
+      @main_categories = Category.order("id asc").where("parent_id is null")
+      @sub_categories = Category.order("id asc").where("parent_id = ?", @main_categories.first.id)
+    end
+
+    def edit
+      @main_categories = Category.order("id asc").where("parent_id is null")
+      @sub_categories = Category.order("id asc").where("parent_id = ?", @main_categories.first.id)
+    end
+  end
+
+
+
   form do |f|
     f.semantic_errors
     
@@ -29,6 +51,9 @@ ActiveAdmin.register Provider do
         f.input :logo, as: :file, hint: (image_tag(f.object.logo.url, size: '256x256') if !f.object.new_record? and !f.object.logo.url.nil?)
         f.input :logo_cache, as: :hidden
       end
+      f.input :main_category_id, :as => :select, :collection => main_categories, :include_blank => true, selected: f.object.main_category_id
+      f.input :sub_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_sub_category', 'data-option-observed' => 'provider_sub_category_id'}, :collection => (f.object.main_category_id ? f.object.main_category.sub_categories.collect {|item| [item.name, item.id]} : []) 
+    
       f.input :product
       f.input :price
       f.input :quantity
@@ -45,6 +70,11 @@ ActiveAdmin.register Provider do
 
   show do
     attributes_table do
+
+      row '分类' do 
+        link_to("#{provider.main_category.name} || #{provider.sub_category.name}",'#')
+      end 
+
       row :title
       row I18n.t('activerecord.attributes.provider.logo') do
 				image_tag provider.logo.url, size: '256x256' unless provider.logo.url.nil?
@@ -86,8 +116,9 @@ ActiveAdmin.register Provider do
     end
     column :title
     column :product
-    column :price
-    column :quantity
+    # column :main_category
+    # column :sub_category
+    # column :quantity
     column :created_at
 
     actions

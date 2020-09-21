@@ -1,4 +1,8 @@
 ## docker 构建方式
+
+docker-compose run app rake db:migrate
+docker-compose run app rake db:seed
+
 dockerfile 指定代理
 
         ARG http_proxy=http://127.0.0.1:2222
@@ -8,6 +12,19 @@ dockerfile 指定代理
 
         ADD sources.list /etc/apt/
         sources.list在dockerfile同目录下
+
+osx 配置docker
+
+          {
+                "debug": true,
+                "experimental": true,
+                "registry-mirrors": [
+                "https://dockerhub.azk8s.cn",
+                "http://hub-mirror.c.163.com"
+                ],
+                "insecure-registries" : [ "47.92.240.100:5000" ]
+                
+          }
 
 ## Commit message 格式
 

@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 2020_09_18_014508) do
     t.integer "user_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.integer "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "pictures", force: :cascade do |t|
     t.string "name"
     t.integer "imageable_id"
@@ -59,6 +66,8 @@ ActiveRecord::Schema.define(version: 2020_09_18_014508) do
     t.datetime "updated_at", null: false
     t.string "avatar"
     t.integer "user_id"
+    t.integer "main_category_id"
+    t.integer "sub_category_id"
   end
 
   create_table "users", force: :cascade do |t|

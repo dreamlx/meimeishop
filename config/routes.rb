@@ -13,6 +13,14 @@ Rails.application.routes.draw do
           post :login
           post :logout
           post :bind
+          get :info
+        end
+      end
+      resources :buyers
+      resources :providers do
+        collection do
+          get :main_category_list
+          get :sub_category_list
         end
       end
     end

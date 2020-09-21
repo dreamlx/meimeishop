@@ -352,6 +352,7 @@ DEPENDENCIES
   qiniu-rs
   rails (~> 5.2.3)
   rails-i18n
+  ransack
   rest-client
   sass-rails (~> 5.0)
   selenium-webdriver
