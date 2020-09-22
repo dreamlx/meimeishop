@@ -41,7 +41,7 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
       return render json: {status: 400, message: "手机号为空"}
     end
     unless @user.present?
-      return render json: {status: 400, message: "该手机号不存在"}
+      @user = User.create!(phone: params[:phone],password: "password",email: "#{params[:phone]}@emple.com")
     end
 
     @wx_user.user_id = @user.id
