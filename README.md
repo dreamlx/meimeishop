@@ -1,7 +1,10 @@
 ## docker 构建方式
 
-docker-compose run app rake db:migrate
-docker-compose run app rake db:seed
+docker-compose up --build # 重新构建
+docker-compose down #停止
+docker-compose up #启动
+docker-compose run app rake db:migrate # 执行迁移
+docker-compose run app rake db:seed # 数据加载
 
 dockerfile 指定代理
 
