@@ -8,8 +8,10 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
     type = params[:type] 
     if type == "all"
       record = Provider.all.order("created_at desc")
+    elsif type == "own"
+      record = Provider.where(user_id: @current_wx_user.user_id).order("created_at desc")
     else
-      record = Provider.where(user_id: @current_wx_user.id).order("created_at desc")
+      record = Provider.where(user_id: params[:user_id]).order("created_at desc")
     end
     @record = Kaminari.paginate_array(record).page(page).per(per)
   end
