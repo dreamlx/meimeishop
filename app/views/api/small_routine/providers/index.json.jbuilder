@@ -16,6 +16,10 @@ json.data do
     json.price lp.price
     json.quantity lp.quantity
     json.avatar lp.avatar
+    json.main_category_id lp.main_category_id
+    json.main_category lp.main_category_id && lp.main_category && lp.main_category.name
+    json.sub_category_id lp.sub_category_id
+    json.sub_category lp.sub_category_id && lp.sub_category && lp.sub_category.name
     json.created_at lp.created_at && lp.created_at.strftime("%Y-%m-%d %H:%M")
     json.updated_at lp.updated_at && lp.updated_at.strftime("%Y-%m-%d %H:%M")
   end
