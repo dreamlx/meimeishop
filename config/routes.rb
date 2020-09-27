@@ -14,6 +14,8 @@ Rails.application.routes.draw do
           post :logout
           post :bind
           get :info
+          get :t_list
+          post :add_record
         end
       end
       resources :buyers

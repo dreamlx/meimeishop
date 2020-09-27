@@ -1,0 +1,2 @@
+class TRecord < ApplicationRecord
+end

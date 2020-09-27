@@ -5,7 +5,14 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
   def index
     page = params[:page] || 1
     per = params[:per] || 20
-    record = Provider.where(user_id: @current_wx_user.id).order("created_at desc")
+    type = params[:type] 
+    if type == "all"
+      record = Provider.all.order("created_at desc")
+    elsif type == "own"
+      record = Provider.where(user_id: @current_wx_user.user_id).order("created_at desc")
+    else
+      record = Provider.where(user_id: params[:user_id]).order("created_at desc")
+    end
     @record = Kaminari.paginate_array(record).page(page).per(per)
   end
 
@@ -28,6 +35,10 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
   end
 
   def update
+    if @current_wx_user.user_id != @record.user_id
+      return render json: {status: 400, message: "不是本人创建,无法修改"}
+    end
+    
     if @record.update!(provider_params)
       result = [200, '修改成功']
     else
@@ -37,6 +48,10 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
   end
 
   def destroy
+    if @current_wx_user.user_id != @record.user_id
+      return render json: {status: 400, message: "不是本人创建,无法删除"}
+    end
+    
     if @record.destroy
       result = [200, '删除成功']
     else
