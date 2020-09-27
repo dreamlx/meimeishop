@@ -1,7 +1,6 @@
 class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
-  protect_from_forgery
   # skip_before_filter :verify_authenticity_token, :only => :bind
-  before_action :authenticate_user!, except: [:login,:logout]
+  before_action :authenticate_user!, except: [:login,:logout,:t_list,:add_record]
 
   def login
     wxappid = ENV['wxappid']
@@ -56,4 +55,26 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
     @record = @current_wx_user
   end
 
+  def t_list
+    page = params[:page] || 1
+    per = params[:per] || 60
+    record = TRecord.all.order("created_at desc")
+    @record = Kaminari.paginate_array(record).page(page).per(per)
+  end
+
+  def add_record
+    @record = TRecord.new(t_params)
+    if @record.save
+      result = [200, '创建成功']
+    else
+      result = [400, '创建失败']
+    end
+    render_json(result)
+  end
+
+  private
+
+  def t_params
+    params.permit(:describe, :number, :title)
+  end
 end
