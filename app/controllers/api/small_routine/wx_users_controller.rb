@@ -58,7 +58,7 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
   def t_list
     page = params[:page] || 1
     per = params[:per] || 60
-    record = TRecord.order("created_at desc").group_by(&:number)
+    record = TRecord.order("updated_at desc").group_by(&:number)
     @record = record
   end
 
