@@ -63,7 +63,11 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
   end
 
   def add_record
-    @record = TRecord.new(t_params)
+    @record = TRecord.find_by(number: params[:number]) || new
+    @record.number = params[:number]
+    @record.title = params[:title] 
+    @record.describe = params[:describe] 
+    
     if @record.save
       result = [200, '创建成功']
     else
