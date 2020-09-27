@@ -7,7 +7,7 @@ json.data do
     json.number lp[1].last.number
     json.title lp[1].last.title
     json.describe lp[1].last.describe
-    json.created_at lp[1].last.created_at && lp[1].last.created_at.strftime("%Y-%m-%d %H:%M")
-    json.updated_at lp[1].last.updated_at && lp[1].last.updated_at.strftime("%Y-%m-%d %H:%M")
+    json.created_at lp[1].last.created_at && lp[1].last.created_at.strftime("%Y-%m-%d %H:%M:%S")
+    json.updated_at lp[1].last.updated_at && lp[1].last.updated_at.strftime("%Y-%m-%d %H:%M:%S")
   end
 end
