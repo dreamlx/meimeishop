@@ -63,7 +63,7 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
   end
 
   def add_record
-    @record = TRecord.find_by(number: params[:number]) || new
+    @record = TRecord.find_by(number: params[:number]) || TRecord.new
     @record.number = params[:number]
     @record.title = params[:title] 
     @record.describe = params[:describe] 
