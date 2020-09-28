@@ -51,7 +51,7 @@ ActiveAdmin.register Provider do
         f.input :logo, as: :file, hint: (image_tag(f.object.logo.url, size: '256x256') if !f.object.new_record? and !f.object.logo.url.nil?)
         f.input :logo_cache, as: :hidden
       end
-      f.input :main_category_id, :as => :select, :collection => main_categories, :include_blank => true, selected: f.object.main_category_id
+      f.input :main_category_id, :as => :select, :collection => MainCategory.all, :include_blank => true, selected: f.object.main_category_id
       f.input :sub_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_sub_category', 'data-option-observed' => 'provider_sub_category_id'}, :collection => (f.object.main_category_id ? f.object.main_category.sub_categories.collect {|item| [item.name, item.id]} : []) 
     
       f.input :product
