@@ -13,6 +13,7 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
     else
       record = Provider.where(user_id: params[:user_id]).order("created_at desc")
     end
+    record = record.ransack(q_params).result(distinct: true)
     @record = Kaminari.paginate_array(record).page(page).per(per)
   end
 

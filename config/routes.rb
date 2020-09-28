@@ -25,6 +25,7 @@ Rails.application.routes.draw do
           get :sub_category_list
         end
       end
+      resources :comments
     end
   end
 
