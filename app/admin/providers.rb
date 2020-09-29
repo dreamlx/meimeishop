@@ -5,14 +5,14 @@ ActiveAdmin.register Provider do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :logo,  :sn, :product, :price, :quantity, :avatar, :user_id, 
+  permit_params :title,  :sn, :product, :price, :quantity, :avatar, :user_id, 
                 :main_category_id, :sub_category_id, :main_category, :sub_category
                 # pictures_attributes: [:id,:name, :imageable_id, :imageable_type, :avatar, :_destroy]
   #
   # or
   #
   # permit_params do
-  #   permitted = [:title, :logo, :qrcode, :sn, :product_name, :price, :quantity]
+  #   permitted = [:title, :qrcode, :sn, :product_name, :price, :quantity]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
@@ -47,10 +47,7 @@ ActiveAdmin.register Provider do
     
     f.inputs '供应内容' do
       f.input :title
-      f.inputs 'logo', :multipart => true do
-        f.input :logo, as: :file, hint: (image_tag(f.object.logo.url, size: '256x256') if !f.object.new_record? and !f.object.logo.url.nil?)
-        f.input :logo_cache, as: :hidden
-      end
+
       f.input :main_category_id, :as => :select, :collection => MainCategory.all, :include_blank => true, selected: f.object.main_category_id
       f.input :sub_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_sub_category', 'data-option-observed' => 'provider_sub_category_id'}, :collection => (f.object.main_category_id ? f.object.main_category.sub_categories.collect {|item| [item.name, item.id]} : []) 
     
@@ -76,9 +73,6 @@ ActiveAdmin.register Provider do
       end 
 
       row :title
-      row I18n.t('activerecord.attributes.provider.logo') do
-				image_tag provider.logo.url, size: '256x256' unless provider.logo.url.nil?
-			end
       row :product
       row :price
       row :quantity

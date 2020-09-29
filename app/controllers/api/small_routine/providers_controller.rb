@@ -82,7 +82,7 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
   end
 
   def provider_params
-    params.permit(:title, :logo, :sn, :product, :price, :quantity, :avatar, :user_id, :main_category_id, :sub_category_id)
+    params.permit(:title, :sn, :product, :price, :quantity, :avatar, :user_id, :main_category_id, :sub_category_id)
   end
 
   def q_params

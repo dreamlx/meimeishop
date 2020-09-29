@@ -8,7 +8,6 @@ json.data do
   json.user_contact @record.user_id && @record.user && @record.user.contact.nil? ? '无内容' : @record.user.contact 
   json.user_qrcode @record.user_id && @record.user && @record.user.qrcode && @record.user.qrcode.url
   json.title @record.title
-  json.logo @record.logo
   json.product @record.product
   json.price @record.price
   json.quantity @record.quantity

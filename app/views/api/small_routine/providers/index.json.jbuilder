@@ -11,7 +11,6 @@ json.data do
     json.user_contact lp.user_id && lp.user && lp.user.contact.nil? ? '无内容' : lp.user.contact 
     json.user_qrcode lp.user_id && lp.user && lp.user.qrcode && lp.user.qrcode.url
     json.title lp.title
-    json.logo lp.logo
     json.product lp.product
     json.price lp.price
     json.quantity lp.quantity

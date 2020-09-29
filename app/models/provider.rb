@@ -12,7 +12,6 @@ class Provider < ApplicationRecord
 
 
     mount_uploader :avatar, AvatarUploader
-    mount_uploader :logo, AvatarUploader
     
 
     
