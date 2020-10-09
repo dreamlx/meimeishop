@@ -27,16 +27,25 @@ ActiveAdmin.register Provider do
     render :json => @sub_categories.to_json(:only => [:id, :name]) and return
   end
 
+  collection_action :get_item_category, :method => :get do
+    @sub_category_id = params[:sub_category_id]
+    @item_categories = Category.where("parent_id = ?", @sub_category_id)
+    render :json => @item_categories.to_json(:only => [:id, :name]) and return
+  end
+
+
   controller do
     def new
       @provider = Provider.new
       @main_categories = Category.order("id asc").where("parent_id is null")
       @sub_categories = Category.order("id asc").where("parent_id = ?", @main_categories.first.id)
+      @item_categories = Category.order("id asc").where("parent_id = ?", @sub_categories.first.id)
     end
 
     def edit
       @main_categories = Category.order("id asc").where("parent_id is null")
       @sub_categories = Category.order("id asc").where("parent_id = ?", @main_categories.first.id)
+      @item_categories = Category.order("id asc").where("parent_id = ?", @sub_categories.first.id)
     end
   end
 
@@ -50,7 +59,8 @@ ActiveAdmin.register Provider do
 
       f.input :main_category_id, :as => :select, :collection => MainCategory.all, :include_blank => true, selected: f.object.main_category_id
       f.input :sub_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_sub_category', 'data-option-observed' => 'provider_sub_category_id'}, :collection => (f.object.main_category_id ? f.object.main_category.sub_categories.collect {|item| [item.name, item.id]} : []) 
-    
+      f.input :item_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_item_category', 'data-option-observed' => 'provider_item_category_id'}, :collection => (f.object.sub_category_id ? f.object.sub_category.item_categories.collect {|item| [item.name, item.id]} : [])
+
       f.input :product
       f.input :price
       f.input :quantity

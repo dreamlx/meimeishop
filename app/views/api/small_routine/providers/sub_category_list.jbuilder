@@ -7,6 +7,7 @@ json.data do
     json.id lp.id
     json.name lp.name
     json.parent_id lp.parent_id
+    json.category_type lp.category_type
     json.created_at lp.created_at && lp.created_at.strftime("%Y-%m-%d %H:%M")
     json.updated_at lp.updated_at && lp.updated_at.strftime("%Y-%m-%d %H:%M")
   end

@@ -5,6 +5,8 @@ class Provider < ApplicationRecord
     belongs_to :user
     belongs_to :sub_category
     belongs_to :main_category
+    belongs_to :item_category
+
 
     validates :title, presence: true
     validates :price, numericality: true

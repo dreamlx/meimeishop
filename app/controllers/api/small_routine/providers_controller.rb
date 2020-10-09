@@ -75,6 +75,13 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
     @record = Kaminari.paginate_array(record).page(page).per(per)
   end
 
+  def item_category_list
+    page = params[:page] || 1
+    per = params[:per] || 20
+    record = ItemCategory.where(parent_id: params[:parent_id]).order("created_at desc")
+    @record = Kaminari.paginate_array(record).page(page).per(per)
+  end
+
   private
 
   def set_record

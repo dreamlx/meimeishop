@@ -1,4 +1,4 @@
-zh-CN:  
+zh-CN:
   activerecord:
     models:
       provider: 供应方
@@ -8,6 +8,7 @@ zh-CN:
       category: 分类
       main_category: 主分类
       sub_category: 子分类
+      item_category: 三级子分类
 
 
     attributes:
@@ -30,11 +31,13 @@ zh-CN:
         created_at: 创建时间
         main_category: 主分类
         sub_category: 子分类
+        item_category: 三级子分类
+
 
       user:
         qrcode: 我的二维码
         phone: 手机号码
-      
+
       category:
         name: 名称
 
@@ -43,8 +46,11 @@ zh-CN:
       sub_category:
         main_category: 上级主分类
         name: 分类名称
+      item_category:
+        sub_category: 上级主分类
+        name: 分类名称
 
-        
+
 
 time:
   formats:

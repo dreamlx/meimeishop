@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         collection do
           get :main_category_list
           get :sub_category_list
+          get :item_category_list
         end
       end
       resources :comments

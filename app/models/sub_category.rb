@@ -1,5 +1,5 @@
 class SubCategory < Category
-    default_scope -> { where("parent_id is not null") }
+    default_scope -> { where("parent_id is not null and category_type = ?","SubCategory") }
     has_many :providers
     belongs_to :main_category, foreign_key: :parent_id
 end
