@@ -76,6 +76,14 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
     render_json(result)
   end
 
+  def getqnyinfo
+    qiniu_access_key = "93vlzlK9UlO6UhZaVlrZ4RyVanIv5f1meAX_ofK2"
+    qiniu_secret_key = "7UGe9arh_jrxTQGa1WLba3D8xDZ-FbXOJSVYAJt7" 
+    qiniu_bucket = "ants"
+    qiniu_bucket_domain = "resource.antsrepublic.com"
+    render json: {status: 200, message: '七牛token' ,data: {qiniu_access_key: qiniu_access_key,qiniu_secret_key: qiniu_secret_key,qiniu_bucket: qiniu_bucket,qiniu_bucket_domain: qiniu_bucket_domain}}
+  end
+
   private
 
   def t_params

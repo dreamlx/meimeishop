@@ -16,6 +16,7 @@ Rails.application.routes.draw do
           get :info
           get :t_list
           post :add_record
+          get :getqnyinfo
         end
       end
       resources :buyers
