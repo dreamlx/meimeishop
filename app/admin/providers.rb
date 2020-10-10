@@ -16,7 +16,6 @@ ActiveAdmin.register Provider do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
   filter :title
   filter :product
   filter :created_at

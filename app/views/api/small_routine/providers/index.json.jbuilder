@@ -20,6 +20,8 @@ json.data do
     json.main_category lp.main_category_id && lp.main_category && lp.main_category.name
     json.sub_category_id lp.sub_category_id
     json.sub_category lp.sub_category_id && lp.sub_category && lp.sub_category.name
+    json.item_category_id lp.item_category_id
+    json.item_category lp.item_category_id && lp.item_category && lp.item_category.name
     json.created_at lp.created_at && lp.created_at.strftime("%Y-%m-%d %H:%M")
     json.updated_at lp.updated_at && lp.updated_at.strftime("%Y-%m-%d %H:%M")
   end
