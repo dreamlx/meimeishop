@@ -1,6 +1,6 @@
 class Api::SmallRoutine::BuyersController < Api::SmallRoutine::BaseController
   before_action :authenticate_user!
-  before_action :set_record, only: [:show, :update, :destroy]
+  before_action :set_record, only: [:show, :update, :upload, :destroy]
 
   def index
     page = params[:page] || 1
@@ -40,8 +40,20 @@ class Api::SmallRoutine::BuyersController < Api::SmallRoutine::BaseController
     if @current_wx_user.user_id != @record.user_id
       return render json: {status: 400, message: "不是本人创建,无法修改"}
     end
-    @record.update!(avatar: open(params[:avatar_url])) if params[:avatar_url]
+    # @record.update!(avatar: open(params[:avatar_url])) if params[:avatar_url]
     if @record.update!(buyer_params)
+      result = [200, '修改成功']
+    else
+      result = [400, '修改失败']
+    end
+    render_json(result)
+  end
+
+  def upload
+    if @current_wx_user.user_id != @record.user_id
+      return render json: {status: 400, message: "不是本人创建,无法修改"}
+    end
+    if @record.update!(provider_params)
       result = [200, '修改成功']
     else
       result = [400, '修改失败']

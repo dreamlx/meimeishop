@@ -16,15 +16,20 @@ Rails.application.routes.draw do
           get :info
           get :t_list
           post :add_record
-          get :getqnyinfo
+          # get :getqnyinfo
         end
       end
-      resources :buyers
+      resources :buyers do
+        collection do
+          post :upload
+        end
+      end
       resources :providers do
         collection do
           get :main_category_list
           get :sub_category_list
           get :item_category_list
+          post :upload
         end
       end
       resources :comments
