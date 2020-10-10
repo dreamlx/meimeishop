@@ -12,6 +12,7 @@ json.data do
   json.price @record.price
   json.quantity @record.quantity
   json.avatar @record.avatar
+  json.avatar_url lp.avatar_url
   json.main_category_id @record.main_category_id
   json.main_category @record.main_category_id && @record.main_category && @record.main_category.name
   json.sub_category_id @record.sub_category_id

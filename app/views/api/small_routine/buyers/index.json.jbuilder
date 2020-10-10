@@ -15,6 +15,7 @@ json.data do
     json.quantity lp.quantity
     json.description lp.description
     json.avatar lp.avatar
+    json.avatar_url lp.avatar_url
     json.created_at lp.created_at && lp.created_at.strftime("%Y-%m-%d %H:%M")
     json.updated_at lp.updated_at && lp.updated_at.strftime("%Y-%m-%d %H:%M")
   end

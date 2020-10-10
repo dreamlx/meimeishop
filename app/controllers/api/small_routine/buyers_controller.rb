@@ -26,6 +26,7 @@ class Api::SmallRoutine::BuyersController < Api::SmallRoutine::BaseController
     end
 
     @record = Buyer.new(buyer_params)
+    @record.avatar = open(params[:avatar_url]) if params[:avatar_url]
     @record.user_id = @current_wx_user.user_id
     if @record.save
       result = [200, '创建成功']
@@ -39,7 +40,7 @@ class Api::SmallRoutine::BuyersController < Api::SmallRoutine::BaseController
     if @current_wx_user.user_id != @record.user_id
       return render json: {status: 400, message: "不是本人创建,无法修改"}
     end
-    
+    @record.update!(avatar: open(params[:avatar_url])) if params[:avatar_url]
     if @record.update!(buyer_params)
       result = [200, '修改成功']
     else
@@ -68,7 +69,7 @@ class Api::SmallRoutine::BuyersController < Api::SmallRoutine::BaseController
   end
 
   def buyer_params
-    params.permit(:sn, :product, :quantity, :description, :avatar, :title, :user_id)
+    params.permit(:sn, :product, :quantity, :description, :avatar, :avatar_url, :title, :user_id)
   end
 
   def q_params

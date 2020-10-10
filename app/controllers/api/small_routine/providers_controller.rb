@@ -26,6 +26,7 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
     end
 
     @record = Provider.new(provider_params)
+    @record.avatar = open(params[:avatar_url]) if params[:avatar_url]
     @record.user_id = @current_wx_user.user_id
     if @record.save
       result = [200, '创建成功']
@@ -39,7 +40,7 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
     if @current_wx_user.user_id != @record.user_id
       return render json: {status: 400, message: "不是本人创建,无法修改"}
     end
-    
+    @record.update!(avatar: open(params[:avatar_url])) if params[:avatar_url]
     if @record.update!(provider_params)
       result = [200, '修改成功']
     else
@@ -89,7 +90,7 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
   end
 
   def provider_params
-    params.permit(:title, :sn, :product, :price, :quantity, :avatar, :user_id, :main_category_id, :sub_category_id)
+    params.permit(:title, :sn, :product, :price, :quantity, :avatar, :avatar_url, :user_id, :main_category_id, :sub_category_id, :item_category_id)
   end
 
   def q_params

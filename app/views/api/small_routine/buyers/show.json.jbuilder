@@ -12,6 +12,7 @@ json.data do
   json.quantity @record.quantity
   json.description @record.description
   json.avatar @record.avatar
+  json.avatar_url lp.avatar_url
   json.created_at @record.created_at && @record.created_at.strftime("%Y-%m-%d %H:%M")
   json.updated_at @record.updated_at && @record.updated_at.strftime("%Y-%m-%d %H:%M")
 end
