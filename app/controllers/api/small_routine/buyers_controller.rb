@@ -5,7 +5,7 @@ class Api::SmallRoutine::BuyersController < Api::SmallRoutine::BaseController
   def index
     page = params[:page] || 1
     per = params[:per] || 20
-    type = params[:type] 
+    type = params[:type]
     if type == "all"
       record = Buyer.all.order("created_at desc")
     elsif type == "own"
@@ -53,7 +53,7 @@ class Api::SmallRoutine::BuyersController < Api::SmallRoutine::BaseController
     if @current_wx_user.user_id != @record.user_id
       return render json: {status: 400, message: "不是本人创建,无法修改"}
     end
-    if @record.update!(provider_params)
+    if @record.update!(buyer_params)
       result = [200, '修改成功']
     else
       result = [400, '修改失败']
@@ -65,7 +65,7 @@ class Api::SmallRoutine::BuyersController < Api::SmallRoutine::BaseController
     if @current_wx_user.user_id != @record.user_id
       return render json: {status: 400, message: "不是本人创建,无法删除"}
     end
-    
+
     if @record.destroy
       result = [200, '删除成功']
     else
