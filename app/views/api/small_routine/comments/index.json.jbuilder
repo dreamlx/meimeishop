@@ -10,6 +10,7 @@ json.data do
     json.resource_id lp.resource_id
     json.author_type lp.author_type
     json.author_id lp.author_id
+    json.author_name lp.author_name
     json.created_at lp.created_at && lp.created_at.strftime("%Y-%m-%d %H:%M")
     json.updated_at lp.updated_at && lp.updated_at.strftime("%Y-%m-%d %H:%M")
   end
