@@ -55,6 +55,23 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
     @record = @current_wx_user
   end
 
+  def update_user_info
+    if @current_wx_user.user_id == nil || @current_wx_user.user == nil
+      return render json:{status: 400, message: '未绑定手机号' }
+    end
+    @record = @current_wx_user.user
+    @record.qrcode = open(params[:qrcode_url]) if params[:qrcode_url]
+    @record.phone = params[:phone]
+    @record.contact = params[:contact]
+    @record.name = params[:name]
+    if @record.save!
+      result = [200, '修改成功']
+    else
+      result = [400, '修改失败']
+    end
+    render_json(result)
+  end
+
   def t_list
     page = params[:page] || 1
     per = params[:per] || 60
@@ -65,9 +82,9 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
   def add_record
     @record = TRecord.find_by(number: params[:number]) || TRecord.new
     @record.number = params[:number]
-    @record.title = params[:title] 
-    @record.describe = params[:describe] 
-    
+    @record.title = params[:title]
+    @record.describe = params[:describe]
+
     if @record.save
       result = [200, '创建成功']
     else
@@ -78,7 +95,7 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
 
   # def getqnyinfo
   #   qiniu_access_key = "93vlzlK9UlO6UhZaVlrZ4RyVanIv5f1meAX_ofK2"
-  #   qiniu_secret_key = "7UGe9arh_jrxTQGa1WLba3D8xDZ-FbXOJSVYAJt7" 
+  #   qiniu_secret_key = "7UGe9arh_jrxTQGa1WLba3D8xDZ-FbXOJSVYAJt7"
   #   qiniu_bucket = "ants"
   #   qiniu_bucket_domain = "resource.antsrepublic.com"
   #   render json: {status: 200, message: '七牛token' ,data: {qiniu_access_key: qiniu_access_key,qiniu_secret_key: qiniu_secret_key,qiniu_bucket: qiniu_bucket,qiniu_bucket_domain: qiniu_bucket_domain}}
@@ -88,5 +105,9 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
 
   def t_params
     params.permit(:describe, :number, :title)
+  end
+
+  def user_params
+    params.permit(:email, :phone, :qrcode, :contact, :name)
   end
 end

@@ -1,3 +1,13 @@
+GIT
+  remote: https://github.com/activeadmin-plugins/active_admin_import.git
+  revision: 1c7601fcccff35bb4217430e3fd0626312f64f2f
+  specs:
+    active_admin_import (4.2.0)
+      activeadmin (>= 1.0.0.pre2)
+      activerecord-import (>= 0.27)
+      rchardet (>= 1.6)
+      rubyzip (>= 1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -48,6 +58,8 @@ GEM
       activemodel (= 5.2.4.4)
       activesupport (= 5.2.4.4)
       arel (>= 9.0)
+    activerecord-import (1.0.6)
+      activerecord (>= 3.2)
     activestorage (5.2.4.4)
       actionpack (= 5.2.4.4)
       activerecord (= 5.2.4.4)
@@ -250,6 +262,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    rchardet (1.8.0)
     regexp_parser (1.7.1)
     request_store (1.5.0)
       rack (>= 1.4)
@@ -330,6 +343,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_admin_import!
   activeadmin
   arctic_admin
   bootsnap (>= 1.1.0)

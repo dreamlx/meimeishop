@@ -40,7 +40,6 @@ class Api::SmallRoutine::BuyersController < Api::SmallRoutine::BaseController
     if @current_wx_user.user_id != @record.user_id
       return render json: {status: 400, message: "不是本人创建,无法修改"}
     end
-    # @record.update!(avatar: open(params[:avatar_url])) if params[:avatar_url]
     if @record.update!(buyer_params)
       result = [200, '修改成功']
     else

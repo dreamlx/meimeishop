@@ -4,9 +4,15 @@ json.data do
   json.id @record.id
   json.sn @record.sn
   json.user_id @record.user_id
-  json.user_name @record.user_id && @record.user && @record.user.name.nil? ? '匿名用户' : @record.user.name 
-  json.user_contact @record.user_id && @record.user && @record.user.contact.nil? ? '无内容' : @record.user.contact 
-  json.user_qrcode @record.user_id && @record.user && @record.user.qrcode && @record.user.qrcode.url
+  if @record.user_id == nil
+    json.user_name @record.user_id && @record.user && @record.user.name
+    json.user_contact @record.user_id && @record.user && @record.user.contact
+    json.user_qrcode @record.user_id && @record.user && @record.user.qrcode && @record.user.qrcode.url
+  else
+    json.user_name @record.user_id && @record.user && @record.user.name.nil? ? '匿名用户' : @record.user.name
+    json.user_contact @record.user_id && @record.user && @record.user.contact.nil? ? '无内容' : @record.user.contact
+    json.user_qrcode @record.user_id && @record.user && @record.user.qrcode && @record.user.qrcode.url
+  end
   json.title @record.title
   json.product @record.product
   json.price @record.price

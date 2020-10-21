@@ -5,7 +5,7 @@ ActiveAdmin.register Provider do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title,  :sn, :product, :price, :quantity, :avatar, :user_id, 
+  permit_params :title,  :sn, :product, :price, :quantity, :avatar, :user_id,
                 :main_category_id, :sub_category_id, :main_category, :sub_category
                 # pictures_attributes: [:id,:name, :imageable_id, :imageable_type, :avatar, :_destroy]
   #
@@ -52,12 +52,12 @@ ActiveAdmin.register Provider do
 
   form do |f|
     f.semantic_errors
-    
+
     f.inputs '供应内容' do
       f.input :title
 
       f.input :main_category_id, :as => :select, :collection => MainCategory.all, :include_blank => true, selected: f.object.main_category_id
-      f.input :sub_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_sub_category', 'data-option-observed' => 'provider_sub_category_id'}, :collection => (f.object.main_category_id ? f.object.main_category.sub_categories.collect {|item| [item.name, item.id]} : []) 
+      f.input :sub_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_sub_category', 'data-option-observed' => 'provider_sub_category_id'}, :collection => (f.object.main_category_id ? f.object.main_category.sub_categories.collect {|item| [item.name, item.id]} : [])
       f.input :item_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_item_category', 'data-option-observed' => 'provider_item_category_id'}, :collection => (f.object.sub_category_id ? f.object.sub_category.item_categories.collect {|item| [item.name, item.id]} : [])
 
       f.input :product
@@ -77,9 +77,9 @@ ActiveAdmin.register Provider do
   show do
     attributes_table do
 
-      row '分类' do 
+      row '分类' do
         link_to("#{provider.main_category.name} || #{provider.sub_category.name}",'#')
-      end 
+      end
 
       row :title
       row :product
@@ -95,7 +95,7 @@ ActiveAdmin.register Provider do
       row "发布者" do
         "#{provider.user.name.nil? ? '匿名用户' : provider.user.name}"
       end
-      
+
       row "联系方式" do
         "#{provider.user.contact.nil? ? '无内容' : provider.user.contact}"
       end
@@ -112,7 +112,7 @@ ActiveAdmin.register Provider do
     id_column
     column '商品图片' do |provider|
       unless provider.avatar.url.nil?
-        link_to image_tag("#{provider.avatar.url}", size: '128x128'), image_path("#{provider.avatar.url}"), :target => "_blank" 
+        link_to image_tag("#{provider.avatar.url}", size: '128x128'), image_path("#{provider.avatar.url}"), :target => "_blank"
       else
         '暂无图片'
       end
@@ -127,5 +127,24 @@ ActiveAdmin.register Provider do
     actions
 
   end
-  
+
 end
+# server {
+# 	listen 8088;
+# 	server_name staffpoints-backend.noahgrouptest.com;
+# 	location / {
+#         proxy_set_header Host $host;
+#         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#         proxy_pass http://127.0.0.1:8088;
+# 	}
+# }
+#
+# server {
+# 	listen 8990;
+# 	server_name staffpoints.test.noahgrouptest.com;
+# 	location / {
+#         proxy_set_header Host $host;
+#         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#         proxy_pass http://127.0.0.1:8990;
+# 	}
+# }

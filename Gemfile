@@ -37,7 +37,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'activeadmin'
-
+gem "active_admin_import" , github: "activeadmin-plugins/active_admin_import"
 # Plus integrations with:
 gem 'devise'
 gem 'cancancan'
@@ -53,7 +53,7 @@ gem 'devise-i18n'
 
 gem 'pg'
 
-gem 'figaro' 
+gem 'figaro'
 gem 'rest-client'
 gem 'ransack'
 
