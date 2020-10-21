@@ -60,11 +60,7 @@ class Api::SmallRoutine::WxUsersController < Api::SmallRoutine::BaseController
       return render json:{status: 400, message: '未绑定手机号' }
     end
     @record = @current_wx_user.user
-    @record.qrcode = open(params[:qrcode_url]) if params[:qrcode_url]
-    @record.phone = params[:phone]
-    @record.contact = params[:contact]
-    @record.name = params[:name]
-    if @record.save!
+    if @record.update!(user_params)
       result = [200, '修改成功']
     else
       result = [400, '修改失败']
