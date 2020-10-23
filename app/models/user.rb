@@ -10,8 +10,18 @@ class User < ApplicationRecord
 
   has_many :buyers
   has_many :providers
+  after_destroy :delete_user_id
 
   def email_required?
     false
   end
+
+  def delete_user_id
+    @wx_user = WxUser.find_by(user_id: self.id)
+    if @wx_user.present?
+      @wx_user.update!(user_id: nil)
+    end
+  end
+
+
 end
