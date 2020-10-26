@@ -36,16 +36,16 @@ ActiveAdmin.register Provider do
   controller do
     def new
       @provider = Provider.new
-      @main_categories = Category.order("id asc").where("parent_id is null")
-      @sub_categories = Category.order("id asc").where("parent_id = ? and category_type = 'SubCategory'", @main_categories.first.id)
-      @item_categories = Category.order("id asc").where("parent_id = ? and category_type = 'ItemCategory'", @sub_categories.first.id)
+      @main_categories = Category.order("id asc").where("parent_id is null and category_type = 'MainCategory'")
+      @sub_categories = Category.order("id asc").where("parent_id = ? and category_type = 'SubCategory'", @main_categories.first&.id)
+      @item_categories = Category.order("id asc").where("parent_id = ? and category_type = 'ItemCategory'", @sub_categories.first&.id)
 
     end
 
     def edit
-      @main_categories = Category.order("id asc").where("parent_id is null")
-      @sub_categories = Category.order("id asc").where("parent_id = ? and category_type = 'SubCategory'", @main_categories.first.id)
-      @item_categories = Category.order("id asc").where("parent_id = ? and category_type = 'ItemCategory'", @sub_categories.first.id)
+      @main_categories = Category.order("id asc").where("parent_id is null and category_type = 'MainCategory'")
+      @sub_categories = Category.order("id asc").where("parent_id = ? and category_type = 'SubCategory'", @main_categories.first&.id)
+      @item_categories = Category.order("id asc").where("parent_id = ? and category_type = 'ItemCategory'", @sub_categories.first&.id)
     end
   end
 

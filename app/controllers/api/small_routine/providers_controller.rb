@@ -5,7 +5,7 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
   def index
     page = params[:page] || 1
     per = params[:per] || 20
-    type = params[:type] 
+    type = params[:type]
     if type == "all"
       record = Provider.all.order("created_at desc")
     elsif type == "own"
@@ -64,7 +64,7 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
     if @current_wx_user.user_id != @record.user_id
       return render json: {status: 400, message: "不是本人创建,无法删除"}
     end
-    
+
     if @record.destroy
       result = [200, '删除成功']
     else
@@ -76,21 +76,21 @@ class Api::SmallRoutine::ProvidersController < Api::SmallRoutine::BaseController
   def main_category_list
     page = params[:page] || 1
     per = params[:per] || 20
-    record = MainCategory.all.order("created_at desc")
+    record = MainCategory.where(category_type: "MainCategory").order("created_at desc")
     @record = Kaminari.paginate_array(record).page(page).per(per)
   end
 
   def sub_category_list
     page = params[:page] || 1
     per = params[:per] || 20
-    record = SubCategory.where(parent_id: params[:parent_id]).order("created_at desc")
+    record = SubCategory.where(parent_id: params[:parent_id], category_type: 'SubCategory').order("created_at desc")
     @record = Kaminari.paginate_array(record).page(page).per(per)
   end
 
   def item_category_list
     page = params[:page] || 1
     per = params[:per] || 20
-    record = ItemCategory.where(parent_id: params[:parent_id]).order("created_at desc")
+    record = ItemCategory.where(parent_id: params[:parent_id], category_type: 'ItemCategory').order("created_at desc")
     @record = Kaminari.paginate_array(record).page(page).per(per)
   end
 
