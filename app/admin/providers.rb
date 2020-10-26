@@ -22,13 +22,13 @@ ActiveAdmin.register Provider do
 
   collection_action :get_sub_category, :method => :get do
     @main_category_id = params[:main_category_id]
-    @sub_categories = Category.where("parent_id = ?", @main_category_id)
+    @sub_categories = Category.where("parent_id = ? and category_type = 'SubCategory'", @main_category_id)
     render :json => @sub_categories.to_json(:only => [:id, :name]) and return
   end
 
   collection_action :get_item_category, :method => :get do
     @sub_category_id = params[:sub_category_id]
-    @item_categories = Category.where("parent_id = ?", @sub_category_id)
+    @item_categories = Category.where("parent_id = ? and category_type = 'ItemCategory'", @sub_category_id)
     render :json => @item_categories.to_json(:only => [:id, :name]) and return
   end
 
@@ -37,15 +37,15 @@ ActiveAdmin.register Provider do
     def new
       @provider = Provider.new
       @main_categories = Category.order("id asc").where("parent_id is null")
-      @sub_categories = Category.order("id asc").where("parent_id = ?", @main_categories.first.id)
-      @item_categories = Category.order("id asc").where("parent_id = ?", @sub_categories.first.id)
+      @sub_categories = Category.order("id asc").where("parent_id = ? and category_type = 'SubCategory'", @main_categories.first.id)
+      @item_categories = Category.order("id asc").where("parent_id = ? and category_type = 'ItemCategory'", @sub_categories.first.id)
 
     end
 
     def edit
       @main_categories = Category.order("id asc").where("parent_id is null")
-      @sub_categories = Category.order("id asc").where("parent_id = ?", @main_categories.first.id)
-      @item_categories = Category.order("id asc").where("parent_id = ?", @sub_categories.first.id)
+      @sub_categories = Category.order("id asc").where("parent_id = ? and category_type = 'SubCategory'", @main_categories.first.id)
+      @item_categories = Category.order("id asc").where("parent_id = ? and category_type = 'ItemCategory'", @sub_categories.first.id)
     end
   end
 
@@ -78,7 +78,7 @@ ActiveAdmin.register Provider do
     attributes_table do
 
       row '分类' do
-        link_to("#{provider.main_category.name} || #{provider.sub_category.name}",'#')
+        link_to("#{provider.main_category.name} || #{provider.sub_category.name} || #{provider.item_category.name}",'#')
       end
 
       row :title
