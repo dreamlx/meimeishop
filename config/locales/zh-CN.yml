@@ -8,7 +8,7 @@ zh-CN:
       category: 分类
       main_category: 主分类
       sub_category: 子分类
-      item_category: 三级子分类
+      item_category: 三级分类
 
 
     attributes:
@@ -31,7 +31,7 @@ zh-CN:
         created_at: 创建时间
         main_category: 主分类
         sub_category: 子分类
-        item_category: 三级子分类
+        item_category: 三级分类
 
 
       user:
@@ -47,7 +47,7 @@ zh-CN:
         main_category: 上级主分类
         name: 分类名称
       item_category:
-        sub_category: 上级主分类
+        sub_category: 上级分类
         name: 分类名称
 
 

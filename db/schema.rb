@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_10_10_034112) do
   create_table "buyers", force: :cascade do |t|
     t.string "sn"
     t.string "product"
-    t.string "quantity"
+    t.integer "quantity"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 2020_10_10_034112) do
     t.string "title"
     t.string "sn"
     t.string "product"
-    t.string "price"
-    t.string "quantity"
+    t.decimal "price"
+    t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"

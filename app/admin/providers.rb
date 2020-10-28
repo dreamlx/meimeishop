@@ -57,8 +57,8 @@ ActiveAdmin.register Provider do
     f.inputs '供应内容' do
       f.input :title
       f.input :main_category_id, :as => :select, :collection => MainCategory.all, :include_blank => true, selected: f.object.main_category_id
-      f.input :sub_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_sub_category', 'data-option-observed' => 'provider_sub_category_id'}, :collection => (f.object.main_category_id ? f.object.main_category.sub_categories.collect {|item| [item.name, item.id]} : [])
-      f.input :item_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_item_category', 'data-option-observed' => 'provider_item_category_id'}, :collection => (f.object.sub_category_id ? f.object.sub_category.item_categories.collect {|item| [item.name, item.id]} : [])
+      f.input :sub_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_sub_category', 'data-option-observed' => 'provider_sub_category_id'}, :collection => (not(f.object.main_category.blank?) ? f.object.main_category.sub_categories.collect {|item| [item.name, item.id]} : [])
+      f.input :item_category_id, :as => :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_item_category', 'data-option-observed' => 'provider_item_category_id'}, :collection => (not(f.object.sub_category.blank?) ? f.object.sub_category.item_categories.collect {|item| [item.name, item.id]} : [])
 
       f.input :product
       f.input :price
@@ -78,7 +78,17 @@ ActiveAdmin.register Provider do
     attributes_table do
 
       row '分类' do
-        link_to("#{provider.main_category.name} || #{provider.sub_category.name} || #{provider.item_category.name}",'#')
+        category_link = ''
+        unless provider.main_category.blank? then
+          category_link += "#{provider.main_category.name} "
+        end
+        unless provider.sub_category.blank? then
+          category_link += "#{provider.sub_category.name} "
+        end
+        unless provider.item_category.blank? then
+          category_link += "#{provider.item_category.name} "
+        end
+        link_to(category_link,'#')
       end
 
       row :title
