@@ -68,9 +68,7 @@ task :load_sku do         #cmd 命令行中执行 rake study_rake 开始执行�
     sku.item_category_id = ItemCategory.find_by_name(category3).id
 
     if not sku.save! then
-        
         puts(sku.errors)
-        
     end
   end
 

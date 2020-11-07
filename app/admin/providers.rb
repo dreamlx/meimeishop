@@ -55,6 +55,7 @@ ActiveAdmin.register Provider do
     f.semantic_errors
 
     f.inputs '供应内容' do
+      f.input :sn
       f.input :title
       f.input :main_category_id, :as => :select, :collection => MainCategory.all, :include_blank => true, selected: f.object.main_category_id
       f.input :sub_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_sub_category', 'data-option-observed' => 'provider_sub_category_id'}, :collection => (not(f.object.main_category.blank?) ? f.object.main_category.sub_categories.collect {|item| [item.name, item.id]} : [])
@@ -91,13 +92,16 @@ ActiveAdmin.register Provider do
         link_to(category_link,'#')
       end
 
+      row :sn
       row :title
+      row :description
       row :product
       row :price
       row :quantity
       row '商品图片' do
 				link_to((image_tag provider.avatar.url, size: '256x256'), provider.avatar.url) unless provider.avatar.url.nil?
       end
+
       row '---' do
         '---'
       end
