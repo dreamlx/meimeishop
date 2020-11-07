@@ -17,6 +17,15 @@
 11 检查价格,自动转换成金额
 12 创建discrption 描述字段
 
+## 导出数据库
+
+进入 rails docker 主容器后
+
+        pg_dump -F c -v -U postgres -h db postgres -f /tmp/meimeishop_production.psql
+
+* 解释: db 就是docker file 里面定义的depends_on(link 和 depends_on的区别就是启动次序), 因为是动态加载所以不知道ip,直接用主机名:db 来访问
+
+
 ## docker 构建方式
 
 docker-compose up --build # 重新构建
