@@ -6,7 +6,7 @@ ActiveAdmin.register Provider do
   # Uncomment all parameters which should be permitted for assignment
   #
   permit_params :title,  :sn, :product, :price, :quantity, :avatar, :user_id,
-                :main_category_id, :sub_category_id, :item_category_id, :item_category, :main_category, :sub_category, :avatar_cache
+                :main_category_id, :sub_category_id, :item_category_id, :item_category, :main_category, :sub_category, :avatar_cache, :description
                 # pictures_attributes: [:id,:name, :imageable_id, :imageable_type, :avatar, :_destroy]
   #
   # or
@@ -59,7 +59,7 @@ ActiveAdmin.register Provider do
       f.input :main_category_id, :as => :select, :collection => MainCategory.all, :include_blank => true, selected: f.object.main_category_id
       f.input :sub_category_id, :as => :select,  :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_sub_category', 'data-option-observed' => 'provider_sub_category_id'}, :collection => (not(f.object.main_category.blank?) ? f.object.main_category.sub_categories.collect {|item| [item.name, item.id]} : [])
       f.input :item_category_id, :as => :select, :input_html => {'data-option-dependent' => true, 'data-option-url' => '/categories/:get_item_category', 'data-option-observed' => 'provider_item_category_id'}, :collection => (not(f.object.sub_category.blank?) ? f.object.sub_category.item_categories.collect {|item| [item.name, item.id]} : [])
-
+      f.input :description
       f.input :product
       f.input :price
       f.input :quantity
