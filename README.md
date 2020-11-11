@@ -2,7 +2,7 @@
 
 增加rake:
 
-        rake load_sku
+        rake load_sku filename
 
 1 读取 tmp/csv 
 2 如果title 同名存在, 那么更新记录
