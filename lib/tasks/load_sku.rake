@@ -1,6 +1,8 @@
 desc "import sku"    #desc 是Rake定义的方法,表示对下面定义任务的描述.这个描述会在使用Rake --tasks(或者Rake -T)命令时输出在屏幕上.
 task :load_sku do         #cmd 命令行中执行 rake study_rake 开始执行脚本，task是Rake最重要的方法.它的方法定义是:task(args, &block).任务体是一个block。
-  sku_list = CSV.read('db/sku2.csv', headers:true)
+  
+  filename = ARGV.second
+  sku_list = CSV.read('db/'+filename, headers:true)
 
   i = 0
   sku_list.each do |item|
