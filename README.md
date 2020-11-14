@@ -1,3 +1,16 @@
+## pg 管理
+
+1. docker-compose
+
+        DATABASE_URL=postgres://postgres:postgres@db/meimei_production
+
+        这里的meimei_production, 如果是开发环境, 可以改为meimei_development
+
+2. 在容器内访问pg
+        psql -h db -U postgres
+        passwd: postgres
+        
+
 ## 20201107 更新
 
 增加rake:
