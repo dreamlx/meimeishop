@@ -1,3 +1,10 @@
+## 创建了测试环境
+
+        meimeitest.easybird.cn
+        端口3001
+        使用 https://segmentfault.com/a/1190000024552266
+        certbot 申请测试https, 3个月需要重新申请
+
 ## pg 管理
 
 1. docker-compose
