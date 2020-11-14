@@ -2,7 +2,7 @@ desc "import sku"    #desc 是Rake定义的方法,表示对下面定义任务的
 task :load_sku do         #cmd 命令行中执行 rake study_rake 开始执行脚本，task是Rake最重要的方法.它的方法定义是:task(args, &block).任务体是一个block。
   
   filename = ARGV.second
-  sku_list = CSV.read('db/'+filename, headers:true)
+  sku_list = CSV.read(filename, headers:true)
 
   i = 0
   sku_list.each do |item|
@@ -31,10 +31,7 @@ task :load_sku do         #cmd 命令行中执行 rake study_rake 开始执行�
         # new
         sku = Provider.new
     end
-
-    #:title,  :sn, :product, :price, :quantity, :avatar, :user_id,
-    #:main_category_id, :sub_category_id, :item_category_id, :item_category, :main_category, :sub_category, :avatar_cache, :description
-
+    
     sku.user_id = 2
     sku.title = title
     sku.sn = sn
