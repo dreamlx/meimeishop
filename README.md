@@ -9,7 +9,10 @@
 2. 在容器内访问pg
         psql -h db -U postgres
         passwd: postgres
+
+3. 创建test yml, 端口3001
         
+        用法, 把test 改为docker-compose.yml
 
 ## 20201107 更新
 
