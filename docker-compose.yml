@@ -8,6 +8,9 @@ services:
       - "POSTGRES_PASSWORD=postgres"
     networks:
       - johnson
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+      
   app:
     build: .
     ports:
