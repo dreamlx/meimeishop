@@ -17,8 +17,9 @@ task :load_sku do         #cmd 命令行中执行 rake study_rake 开始执行�
     category3 = item[5]
     product = item[6]
     price = item[7]
-    quantity = item[8]
-    avatar = item[9]
+    market_price = item[8]
+    quantity = item[9]
+    avatar = item[10]
 
     puts(title,i)
 
