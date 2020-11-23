@@ -26,7 +26,8 @@ zh-CN:
         product: 商品名称
         logo: 商品LOGO
         quantity: 库存数量
-        price: 商品单价
+        price: 成本价
+        market_price: 市场价
         avatar: 商品图片
         created_at: 创建时间
         main_category: 主分类

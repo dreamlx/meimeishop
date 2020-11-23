@@ -5,7 +5,7 @@ ActiveAdmin.register Provider do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title,  :sn, :product, :price, :quantity, :avatar, :user_id,
+  permit_params :title,  :sn, :product, :price, :quantity, :avatar, :user_id,:market_price,
                 :main_category_id, :sub_category_id, :item_category_id, :item_category, :main_category, :sub_category, :avatar_cache, :description
                 # pictures_attributes: [:id,:name, :imageable_id, :imageable_type, :avatar, :_destroy]
   #
@@ -63,6 +63,7 @@ ActiveAdmin.register Provider do
       f.input :description
       f.input :product
       f.input :price
+      f.input :market_price
       f.input :quantity
       f.input :user_id, :input_html => { :value => current_user.id }, as: :hidden
     end
@@ -97,6 +98,7 @@ ActiveAdmin.register Provider do
       row :description
       row :product
       row :price
+      row :market_price
       row :quantity
       row '商品图片' do
 				link_to((image_tag provider.avatar.url, size: '256x256'), provider.avatar.url) unless provider.avatar.url.nil?
